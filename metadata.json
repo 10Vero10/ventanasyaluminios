@@ -1,0 +1,6 @@
+{
+  "name": "Ventanas y Aluminios",
+  "description": "Fabricación e instalación a medida de ventanas, puertas, portones y divisiones con acabados de excelencia y más de 25 años de experiencia.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

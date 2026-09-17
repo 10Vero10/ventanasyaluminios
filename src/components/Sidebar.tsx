@@ -5,7 +5,6 @@ import {
   Grid3X3, 
   Users, 
   Calculator, 
-  Sliders, 
   Phone, 
   Mail, 
   X, 
@@ -22,6 +21,8 @@ interface SidebarProps {
   onCloseMobile: () => void;
   phone: string;
   email: string;
+  whatsappNumber: string;
+  quotingEnabled: boolean;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -31,24 +32,23 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onCloseMobile,
   phone,
   email,
+  whatsappNumber,
+  quotingEnabled,
 }) => {
   const navItems: { tab: TabType; label: string; icon: React.ReactNode; badge?: string }[] = [
     { tab: 'inicio', label: 'Inicio', icon: <Home className="w-5 h-5" /> },
     { tab: 'catalogo', label: 'Catálogo', icon: <Grid3X3 className="w-5 h-5" />, badge: '4 Líneas' },
     { tab: 'nosotros', label: 'Nosotros', icon: <Users className="w-5 h-5" /> },
-    { 
-      tab: 'cotizar', 
-      label: 'Cotizar', 
-      icon: <Calculator className="w-5 h-5" />, 
-      badge: 'Plano Escala' 
-    },
-    { 
-      tab: 'admin', 
-      label: 'Panel de Control', 
-      icon: <Sliders className="w-5 h-5" />, 
-      badge: 'Editor' 
-    },
   ];
+
+  if (quotingEnabled) {
+    navItems.push({
+      tab: 'cotizar',
+      label: 'Cotizar',
+      icon: <Calculator className="w-5 h-5" />,
+      badge: 'Plano Escala',
+    });
+  }
 
   const handleNavClick = (tab: TabType) => {
     onSelectTab(tab);
@@ -56,7 +56,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const whatsappUrl = `https://wa.me/573178463260?text=${encodeURIComponent(
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
     'Hola Ventanas y Aluminios, quiero cotizar un proyecto a medida.'
   )}`;
 
@@ -154,27 +154,29 @@ export const Sidebar: React.FC<SidebarProps> = ({
         })}
 
         {/* Quick action button for Cotización */}
-        <div className="pt-4">
-          <div className="p-4 rounded-xl bg-gradient-to-br from-[#eff6ff] to-[#dbeafe] border border-[#bfdbfe]">
-            <div className="flex items-center gap-2 mb-1.5">
-              <Sparkles className="w-4 h-4 text-[#1e40af]" />
-              <p className="text-xs font-bold text-[#1e40af] font-heading uppercase tracking-wide">
-                Configurador a Escala
+        {quotingEnabled && (
+          <div className="pt-4">
+            <div className="p-4 rounded-xl bg-gradient-to-br from-[#eff6ff] to-[#dbeafe] border border-[#bfdbfe]">
+              <div className="flex items-center gap-2 mb-1.5">
+                <Sparkles className="w-4 h-4 text-[#1e40af]" />
+                <p className="text-xs font-bold text-[#1e40af] font-heading uppercase tracking-wide">
+                  Configurador a Escala
+                </p>
+              </div>
+              <p className="text-xs text-[#3b82f6] leading-relaxed mb-3">
+                Calcula medidas milimétricas de tu ventana o puerta en tiempo real.
               </p>
+              <button
+                id="sidebar-quick-quote-button"
+                onClick={() => handleNavClick('cotizar')}
+                className="w-full py-2 px-3 bg-[#00236f] hover:bg-[#1e3a8a] text-white text-xs font-semibold rounded-md shadow transition flex items-center justify-center gap-2"
+              >
+                <Calculator className="w-3.5 h-3.5" />
+                <span>Abrir Configurador</span>
+              </button>
             </div>
-            <p className="text-xs text-[#3b82f6] leading-relaxed mb-3">
-              Calcula medidas milimétricas de tu ventana o puerta en tiempo real.
-            </p>
-            <button
-              id="sidebar-quick-quote-button"
-              onClick={() => handleNavClick('cotizar')}
-              className="w-full py-2 px-3 bg-[#00236f] hover:bg-[#1e3a8a] text-white text-xs font-semibold rounded-md shadow transition flex items-center justify-center gap-2"
-            >
-              <Calculator className="w-3.5 h-3.5" />
-              <span>Abrir Configurador</span>
-            </button>
           </div>
-        </div>
+        )}
       </div>
 
       {/* Contact & Footer in Sidebar */}

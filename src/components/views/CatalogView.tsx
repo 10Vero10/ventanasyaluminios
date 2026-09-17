@@ -16,6 +16,7 @@ interface CatalogViewProps {
   onSelectTab: (tab: TabType) => void;
   initialFilter?: string;
   onSelectProductForQuote?: (productTitle: string, category: string) => void;
+  quotingEnabled: boolean;
 }
 
 export const CatalogView: React.FC<CatalogViewProps> = ({
@@ -23,6 +24,7 @@ export const CatalogView: React.FC<CatalogViewProps> = ({
   onSelectTab,
   initialFilter = 'todos',
   onSelectProductForQuote,
+  quotingEnabled,
 }) => {
   const [selectedFilter, setSelectedFilter] = useState<string>(initialFilter);
   const [activeModalProduct, setActiveModalProduct] = useState<ProductSystem | null>(null);
@@ -201,17 +203,19 @@ export const CatalogView: React.FC<CatalogViewProps> = ({
 
               {/* Action Buttons */}
               <div className="p-4 sm:px-6 pb-6 pt-2 flex flex-col sm:flex-row gap-2.5">
-                <button
-                  onClick={() => handleQuoteClick(product)}
-                  className="flex-1 py-2.5 px-4 bg-[#00236f] hover:bg-[#1e3a8a] text-white text-xs sm:text-sm font-bold font-heading rounded-lg shadow-xs transition-colors flex items-center justify-center gap-2"
-                >
-                  <Send className="w-3.5 h-3.5" />
-                  <span>{product.ctaText || 'Cotizar este sistema'}</span>
-                </button>
+                {quotingEnabled && (
+                  <button
+                    onClick={() => handleQuoteClick(product)}
+                    className="flex-1 py-2.5 px-4 bg-[#00236f] hover:bg-[#1e3a8a] text-white text-xs sm:text-sm font-bold font-heading rounded-lg shadow-xs transition-colors flex items-center justify-center gap-2"
+                  >
+                    <Send className="w-3.5 h-3.5" />
+                    <span>{product.ctaText || 'Cotizar este sistema'}</span>
+                  </button>
+                )}
 
                 <button
                   onClick={() => setActiveModalProduct(product)}
-                  className="py-2.5 px-4 bg-[#f1f5f9] hover:bg-[#e2e8f0] text-[#00236f] text-xs sm:text-sm font-semibold font-heading rounded-lg transition-colors flex items-center justify-center gap-1.5"
+                  className="flex-1 py-2.5 px-4 bg-[#f1f5f9] hover:bg-[#e2e8f0] text-[#00236f] text-xs sm:text-sm font-semibold font-heading rounded-lg transition-colors flex items-center justify-center gap-1.5"
                 >
                   <span>Detalles</span>
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -223,7 +227,8 @@ export const CatalogView: React.FC<CatalogViewProps> = ({
       </section>
 
       {/* Bottom CTA */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      {quotingEnabled && (
+        <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-[#00236f] text-white rounded-xl p-8 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="space-y-2 max-w-xl">
             <p className="text-xs font-bold tracking-widest text-blue-200 uppercase font-heading">
@@ -246,7 +251,8 @@ export const CatalogView: React.FC<CatalogViewProps> = ({
             Cotizar ahora
           </button>
         </div>
-      </section>
+        </section>
+      )}
 
       {/* Product Spec Detail Modal */}
       {activeModalProduct && (
@@ -310,16 +316,18 @@ export const CatalogView: React.FC<CatalogViewProps> = ({
             </div>
 
             <div className="pt-4 border-t border-slate-200 flex gap-3">
-              <button
-                onClick={() => {
-                  const prod = activeModalProduct;
-                  setActiveModalProduct(null);
-                  handleQuoteClick(prod);
-                }}
-                className="flex-1 py-3 px-4 bg-[#00236f] hover:bg-[#1e3a8a] text-white font-heading font-bold text-sm rounded-lg transition text-center shadow"
-              >
-                Solicitar Cotización de este Sistema
-              </button>
+              {quotingEnabled && (
+                <button
+                  onClick={() => {
+                    const prod = activeModalProduct;
+                    setActiveModalProduct(null);
+                    handleQuoteClick(prod);
+                  }}
+                  className="flex-1 py-3 px-4 bg-[#00236f] hover:bg-[#1e3a8a] text-white font-heading font-bold text-sm rounded-lg transition text-center shadow"
+                >
+                  Solicitar Cotización de este Sistema
+                </button>
+              )}
             </div>
           </div>
         </div>

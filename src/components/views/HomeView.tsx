@@ -17,12 +17,14 @@ interface HomeViewProps {
   content: SiteContent;
   onSelectTab: (tab: TabType) => void;
   onFilterCategory?: (cat: string) => void;
+  quotingEnabled: boolean;
 }
 
 export const HomeView: React.FC<HomeViewProps> = ({
   content,
   onSelectTab,
   onFilterCategory,
+  quotingEnabled,
 }) => {
   const scrollToTrajectory = () => {
     document.getElementById('trayectoria-section')?.scrollIntoView({ behavior: 'smooth' });
@@ -75,17 +77,19 @@ export const HomeView: React.FC<HomeViewProps> = ({
                   <ArrowRight className="w-4 h-4" />
                 </button>
 
-                <button
-                  id="hero-quote-button"
-                  onClick={() => {
-                    onSelectTab('cotizar');
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }}
-                  className="flex items-center justify-center gap-2.5 px-6 py-3.5 bg-[#eff6ff] hover:bg-[#dbeafe] border border-[#bfdbfe] text-[#00236f] rounded-lg font-heading font-semibold text-sm sm:text-base transition-colors"
-                >
-                  <FileText className="w-4 h-4 text-[#1e40af]" />
-                  <span>Cotizar</span>
-                </button>
+                {quotingEnabled && (
+                  <button
+                    id="hero-quote-button"
+                    onClick={() => {
+                      onSelectTab('cotizar');
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
+                    className="flex items-center justify-center gap-2.5 px-6 py-3.5 bg-[#eff6ff] hover:bg-[#dbeafe] border border-[#bfdbfe] text-[#00236f] rounded-lg font-heading font-semibold text-sm sm:text-base transition-colors"
+                  >
+                    <FileText className="w-4 h-4 text-[#1e40af]" />
+                    <span>Cotizar</span>
+                  </button>
+                )}
               </div>
 
               {/* Micro highlights */}
@@ -286,8 +290,9 @@ export const HomeView: React.FC<HomeViewProps> = ({
       </section>
 
       {/* SECTION: CTA BANNER (¿Listo para tu proyecto? Recibimos tu cotización.) */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#00236f] text-white rounded-2xl p-6 sm:p-10 lg:p-12 shadow-xl relative overflow-hidden text-center sm:text-left">
+      {quotingEnabled && (
+        <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-[#00236f] text-white rounded-2xl p-6 sm:p-10 lg:p-12 shadow-xl relative overflow-hidden text-center sm:text-left">
           {/* Subtle architectural decorative lines */}
           <div className="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 border border-blue-400/20 rounded-full pointer-events-none"></div>
           <div className="absolute bottom-0 right-1/4 -mb-12 w-48 h-48 border border-blue-400/10 rounded-full pointer-events-none"></div>
@@ -325,8 +330,9 @@ export const HomeView: React.FC<HomeViewProps> = ({
               </div>
             </div>
           </div>
-        </div>
-      </section>
+          </div>
+        </section>
+      )}
     </div>
   );
 };

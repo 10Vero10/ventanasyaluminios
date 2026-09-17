@@ -1,4 +1,41 @@
-import { SiteContent, ProductSystem } from '../types';
+import { SiteContent, ProductSystem, GalleryImage, AboutContent } from '../types';
+
+export const INITIAL_HERO_GALLERY: GalleryImage[] = [
+  {
+    id: 'g-1',
+    title: 'Fachada Minimalista Cristales Altos',
+    url: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80',
+  },
+  {
+    id: 'g-2',
+    title: 'Ventanal Panorámico Sala Europea',
+    url: 'https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?auto=format&fit=crop&w=1600&q=80',
+  },
+  {
+    id: 'g-3',
+    title: 'Puerta Monumental & Aluminio Negro',
+    url: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1600&q=80',
+  },
+  {
+    id: 'g-4',
+    title: 'Oficina Cristal Templado & Fachada',
+    url: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=80',
+  },
+  {
+    id: 'g-5',
+    title: 'Taller de Carpintería y Ensamble',
+    url: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1600&q=80',
+  },
+];
+
+export const INITIAL_ABOUT_CONTENT: AboutContent = {
+  paragraph1:
+    'Somos una empresa especializada en la fabricación e instalación de soluciones en vidrio, aluminio y otros materiales, con más de 25 años de experiencia en el sector.',
+  paragraph2:
+    'Durante todos estos años hemos trabajado para brindar a nuestros clientes productos de alta calidad, excelentes acabados y soluciones adaptadas a sus necesidades, cuidando cada detalle desde la fabricación hasta la instalación.',
+  highlightText:
+    'Contamos con un equipo de trabajo comprometido y con amplia experiencia, preparado para desarrollar proyectos residenciales, comerciales y empresariales.',
+};
 
 export const INITIAL_SITE_CONTENT: SiteContent = {
   heroTitle: 'Aluminio y vidrio a la medida del proyecto',
@@ -7,7 +44,10 @@ export const INITIAL_SITE_CONTENT: SiteContent = {
   heroBadge: 'VIDRIO TEMPLADO & ALUMINIO · Sistemas 2025',
   phone: '+57 317 846 3260',
   email: 'ventanaluminio@hotmail.com',
+  whatsappNumber: '573178463260',
   experienceYears: 25,
+  adminPin: '1234',
+  quotingEnabled: true,
   featuredLines: [
     {
       id: 'feat-1',
@@ -50,6 +90,8 @@ export const INITIAL_SITE_CONTENT: SiteContent = {
       targetCategory: 'divisiones',
     },
   ],
+  heroGallery: INITIAL_HERO_GALLERY,
+  about: INITIAL_ABOUT_CONTENT,
 };
 
 export const PRODUCT_SYSTEMS: ProductSystem[] = [
@@ -197,3 +239,24 @@ export const PRODUCT_SYSTEMS: ProductSystem[] = [
     ctaText: 'Cotizar división en acrílico',
   },
 ];
+
+export function createId(prefix = 'item'): string {
+  return `${prefix}-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
+}
+
+export function normalizeSiteContent(saved: any): SiteContent {
+  const base = INITIAL_SITE_CONTENT;
+  const merged: SiteContent = { ...base, ...(saved || {}) };
+  merged.about = { ...INITIAL_ABOUT_CONTENT, ...(saved?.about || {}) };
+  merged.featuredLines = Array.isArray(saved?.featuredLines) ? saved.featuredLines : base.featuredLines;
+  merged.heroGallery = Array.isArray(saved?.heroGallery) ? saved.heroGallery : base.heroGallery;
+  merged.quotingEnabled = saved?.quotingEnabled !== false;
+  merged.adminPin = merged.adminPin || '1234';
+  merged.whatsappNumber = merged.whatsappNumber || merged.phone.replace(/[^\d]/g, '');
+  return merged;
+}
+
+export function normalizeProducts(saved: any): ProductSystem[] {
+  if (!Array.isArray(saved) || saved.length === 0) return PRODUCT_SYSTEMS;
+  return saved;
+}

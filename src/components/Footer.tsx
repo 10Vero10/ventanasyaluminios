@@ -6,9 +6,10 @@ interface FooterProps {
   onSelectTab: (tab: TabType) => void;
   phone: string;
   email: string;
+  quotingEnabled: boolean;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onSelectTab, phone, email }) => {
+export const Footer: React.FC<FooterProps> = ({ onSelectTab, phone, email, quotingEnabled }) => {
   return (
     <footer className="bg-[#0b1728] text-white pt-12 pb-24 lg:pb-12 border-t border-[#1e293b]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -82,18 +83,20 @@ export const Footer: React.FC<FooterProps> = ({ onSelectTab, phone, email }) => 
                   <span>¿Quiénes somos?</span>
                 </button>
               </li>
-              <li>
-                <button
-                  onClick={() => {
-                    onSelectTab('cotizar');
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }}
-                  className="hover:text-white flex items-center gap-1.5 transition-colors group"
-                >
-                  <ChevronRight className="w-3.5 h-3.5 text-slate-500 group-hover:text-blue-400 transition-colors" />
-                  <span>Configurador & Cotizar</span>
-                </button>
-              </li>
+              {quotingEnabled && (
+                <li>
+                  <button
+                    onClick={() => {
+                      onSelectTab('cotizar');
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
+                    className="hover:text-white flex items-center gap-1.5 transition-colors group"
+                  >
+                    <ChevronRight className="w-3.5 h-3.5 text-slate-500 group-hover:text-blue-400 transition-colors" />
+                    <span>Configurador & Cotizar</span>
+                  </button>
+                </li>
+              )}
             </ul>
           </div>
 

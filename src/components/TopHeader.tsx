@@ -1,6 +1,6 @@
 import React from 'react';
 import { TabType } from '../types';
-import { Menu, Phone, User, Sliders, Shield } from 'lucide-react';
+import { Menu, Phone, Shield } from 'lucide-react';
 
 interface TopHeaderProps {
   currentTab: TabType;
@@ -8,6 +8,7 @@ interface TopHeaderProps {
   onSelectTab: (tab: TabType) => void;
   phone: string;
   email: string;
+  quotingEnabled: boolean;
 }
 
 export const TopHeader: React.FC<TopHeaderProps> = ({
@@ -16,6 +17,7 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
   onSelectTab,
   phone,
   email,
+  quotingEnabled,
 }) => {
   const getTabLabel = (tab: TabType) => {
     switch (tab) {
@@ -118,32 +120,15 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
           </a>
 
           {/* Quick Cotizar CTA button for desktop */}
-          <button
-            id="header-cotizar-cta-button"
-            onClick={() => onSelectTab('cotizar')}
-            className="hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-md bg-[#00236f] hover:bg-[#1e3a8a] text-white text-xs font-semibold shadow-xs transition-colors font-heading"
-          >
-            <span>Cotizar Proyecto</span>
-          </button>
-
-          {/* Admin / Profile button */}
-          <button
-            id="header-admin-button"
-            onClick={() => onSelectTab(currentTab === 'admin' ? 'inicio' : 'admin')}
-            className={`p-2.5 rounded-full transition-colors flex items-center justify-center shadow-xs ${
-              currentTab === 'admin'
-                ? 'bg-[#00236f] text-white ring-2 ring-blue-300'
-                : 'bg-[#f1f5f9] text-[#1e3a8a] hover:bg-[#e2e8f0]'
-            }`}
-            title="Panel de Control (Admin)"
-            aria-label="Panel de Control"
-          >
-            {currentTab === 'admin' ? (
-              <Sliders className="w-4 h-4" />
-            ) : (
-              <User className="w-4 h-4" />
-            )}
-          </button>
+          {quotingEnabled && (
+            <button
+              id="header-cotizar-cta-button"
+              onClick={() => onSelectTab('cotizar')}
+              className="hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-md bg-[#00236f] hover:bg-[#1e3a8a] text-white text-xs font-semibold shadow-xs transition-colors font-heading"
+            >
+              <span>Cotizar Proyecto</span>
+            </button>
+          )}
         </div>
       </div>
     </header>

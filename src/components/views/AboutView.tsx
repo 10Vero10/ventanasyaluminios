@@ -1,5 +1,5 @@
 import React from 'react';
-import { TabType } from '../../types';
+import { SiteContent, TabType } from '../../types';
 import { 
   ShieldCheck, 
   Users, 
@@ -13,14 +13,19 @@ import {
 } from 'lucide-react';
 
 interface AboutViewProps {
+  content: SiteContent;
   onSelectTab: (tab: TabType) => void;
-  experienceYears: number;
+  quotingEnabled: boolean;
 }
 
 export const AboutView: React.FC<AboutViewProps> = ({
+  content,
   onSelectTab,
-  experienceYears,
+  quotingEnabled,
 }) => {
+  const experienceYears = content.experienceYears;
+  const about = content.about;
+
   return (
     <div className="space-y-12 pb-16">
       {/* Header */}
@@ -93,17 +98,17 @@ export const AboutView: React.FC<AboutViewProps> = ({
               ¿Quiénes somos?
             </h2>
             <p className="text-sm sm:text-base text-[#475569] leading-relaxed">
-              Somos una empresa especializada en la fabricación e instalación de soluciones en vidrio, aluminio y otros materiales, con más de {experienceYears} años de experiencia en el sector.
+              {about.paragraph1}
             </p>
             <p className="text-sm sm:text-base text-[#475569] leading-relaxed">
-              Durante todos estos años hemos trabajado para brindar a nuestros clientes productos de alta calidad, excelentes acabados y soluciones adaptadas a sus necesidades, cuidando cada detalle desde la fabricación hasta la instalación.
+              {about.paragraph2}
             </p>
 
             {/* Highlight Box */}
             <div className="p-4 rounded-xl bg-[#eff6ff] border border-[#bfdbfe] flex items-start gap-3">
               <Users className="w-5 h-5 text-[#1e40af] shrink-0 mt-0.5" />
               <p className="text-xs sm:text-sm text-[#1e3a8a] font-medium leading-relaxed">
-                Contamos con un equipo de trabajo comprometido y con amplia experiencia, preparado para desarrollar proyectos residenciales, comerciales y empresariales.
+                {about.highlightText}
               </p>
             </div>
           </div>
@@ -145,12 +150,11 @@ export const AboutView: React.FC<AboutViewProps> = ({
               </p>
             </div>
 
-            {/* Card 2: RCE Sector */}
+            {/* Card 2: Proyectos integrales */}
             <div className="p-6 rounded-xl bg-[#f8fafc] border border-[#e2e8f0] flex flex-col justify-between space-y-3">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-lg bg-[#e0e7ff] text-[#4338ca] flex flex-col items-center justify-center font-heading font-extrabold text-sm leading-tight">
-                  <span>RCE</span>
-                  <span className="text-[9px] uppercase tracking-tighter">Sector</span>
+                <div className="w-12 h-12 rounded-lg bg-[#e0e7ff] text-[#4338ca] flex items-center justify-center">
+                  <Building className="w-7 h-7" />
                 </div>
                 <div>
                   <h3 className="text-base font-bold text-[#00236f] font-heading">
@@ -164,12 +168,11 @@ export const AboutView: React.FC<AboutViewProps> = ({
               </p>
             </div>
 
-            {/* Card 3: FI Control */}
+            {/* Card 3: Equipo especializado */}
             <div className="p-6 rounded-xl bg-[#f8fafc] border border-[#e2e8f0] flex flex-col justify-between space-y-3">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-lg bg-[#dcfce7] text-[#15803d] flex flex-col items-center justify-center font-heading font-extrabold text-sm leading-tight">
-                  <span>FI</span>
-                  <span className="text-[9px] uppercase tracking-tighter">Control</span>
+                <div className="w-12 h-12 rounded-lg bg-[#dcfce7] text-[#15803d] flex items-center justify-center">
+                  <ShieldCheck className="w-7 h-7" />
                 </div>
                 <div>
                   <h3 className="text-base font-bold text-[#00236f] font-heading">
@@ -244,31 +247,33 @@ export const AboutView: React.FC<AboutViewProps> = ({
       </section>
 
       {/* CTA Box */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#00236f] text-white rounded-2xl p-8 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl text-left">
-          <div className="space-y-2">
-            <p className="text-xs font-bold tracking-widest text-blue-200 uppercase font-heading">
-              Inicia tu Proyecto
-            </p>
-            <h3 className="text-2xl sm:text-3xl font-extrabold font-heading">
-              ¿Quieres un trabajo así de cuidado? <span className="font-serif italic font-normal text-blue-200">Hablemos.</span>
-            </h3>
-            <p className="text-sm text-blue-100 max-w-lg">
-              Te contamos cómo fabricamos e instalamos cada proyecto a la medida exacta de tu hogar u oficina.
-            </p>
+      {quotingEnabled && (
+        <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-[#00236f] text-white rounded-2xl p-8 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl text-left">
+            <div className="space-y-2">
+              <p className="text-xs font-bold tracking-widest text-blue-200 uppercase font-heading">
+                Inicia tu Proyecto
+              </p>
+              <h3 className="text-2xl sm:text-3xl font-extrabold font-heading">
+                ¿Quieres un trabajo así de cuidado? <span className="font-serif italic font-normal text-blue-200">Hablemos.</span>
+              </h3>
+              <p className="text-sm text-blue-100 max-w-lg">
+                Te contamos cómo fabricamos e instalamos cada proyecto a la medida exacta de tu hogar u oficina.
+              </p>
+            </div>
+            <button
+              onClick={() => {
+                onSelectTab('cotizar');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="px-6 py-3.5 bg-white text-[#00236f] hover:bg-blue-50 font-heading font-bold text-sm sm:text-base rounded-lg shadow-md transition-all flex items-center gap-2 shrink-0"
+            >
+              <span>Cotizar ahora</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
           </div>
-          <button
-            onClick={() => {
-              onSelectTab('cotizar');
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
-            className="px-6 py-3.5 bg-white text-[#00236f] hover:bg-blue-50 font-heading font-bold text-sm sm:text-base rounded-lg shadow-md transition-all flex items-center gap-2 shrink-0"
-          >
-            <span>Cotizar ahora</span>
-            <ArrowRight className="w-4 h-4" />
-          </button>
-        </div>
-      </section>
+        </section>
+      )}
     </div>
   );
 };

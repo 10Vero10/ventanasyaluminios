@@ -19,6 +19,7 @@ import {
 interface QuoteViewProps {
   phone: string;
   email: string;
+  whatsappNumber: string;
   initialProductType?: string;
   onQuoteSubmitted?: (data: QuoteFormData) => void;
 }
@@ -26,6 +27,7 @@ interface QuoteViewProps {
 export const QuoteView: React.FC<QuoteViewProps> = ({
   phone,
   email,
+  whatsappNumber,
   initialProductType,
   onQuoteSubmitted,
 }) => {
@@ -110,7 +112,7 @@ export const QuoteView: React.FC<QuoteViewProps> = ({
 *Acabado de perfil:* ${profileColor}
 *Detalles adicionales:* ${formData.message || 'Sin observaciones adicionales'}`;
 
-    return `https://wa.me/573178463260?text=${encodeURIComponent(message)}`;
+    return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
   };
 
   return (

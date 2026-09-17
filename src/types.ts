@@ -1,8 +1,10 @@
 export type TabType = 'inicio' | 'catalogo' | 'nosotros' | 'cotizar' | 'admin';
 
+export type ProductCategory = 'ventanas' | 'puertas' | 'portones' | 'divisiones';
+
 export interface ProductSystem {
   id: string;
-  category: 'ventanas' | 'puertas' | 'portones' | 'divisiones';
+  category: ProductCategory;
   title: string;
   subtitle: string;
   description: string;
@@ -25,7 +27,19 @@ export interface FeaturedLine {
   description: string;
   image: string;
   linkText: string;
-  targetCategory: 'ventanas' | 'puertas' | 'portones' | 'divisiones';
+  targetCategory: ProductCategory;
+}
+
+export interface GalleryImage {
+  id: string;
+  title: string;
+  url: string;
+}
+
+export interface AboutContent {
+  paragraph1: string;
+  paragraph2: string;
+  highlightText: string;
 }
 
 export interface SiteContent {
@@ -35,8 +49,13 @@ export interface SiteContent {
   heroBadge: string;
   phone: string;
   email: string;
+  whatsappNumber: string;
   experienceYears: number;
+  adminPin: string;
+  quotingEnabled: boolean;
   featuredLines: FeaturedLine[];
+  heroGallery: GalleryImage[];
+  about: AboutContent;
 }
 
 export interface QuoteFormData {

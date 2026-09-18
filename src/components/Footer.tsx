@@ -13,7 +13,7 @@ export const Footer: React.FC<FooterProps> = ({ onSelectTab, phone, email, quoti
   return (
     <footer className="bg-[#0b1728] text-white pt-12 pb-24 lg:pb-12 border-t border-[#1e293b]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pb-10 border-b border-slate-800">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-10 border-b border-slate-800">
           {/* Col 1: Brand Info */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
@@ -127,28 +127,6 @@ export const Footer: React.FC<FooterProps> = ({ onSelectTab, phone, email, quoti
             </div>
           </div>
 
-          {/* Col 4: Horarios & Visitas */}
-          <div className="space-y-3 bg-slate-900/60 p-4 rounded-lg border border-slate-800">
-            <p className="text-xs font-bold tracking-wider text-white uppercase font-heading">
-              Visitas Técnicas en Obra
-            </p>
-            <p className="text-xs text-slate-300 leading-relaxed">
-              Realizamos toma de medidas con distanciómetro láser y verificación de vanos sin costo adicional.
-            </p>
-            <div className="text-xs text-blue-300">
-              <p className="font-semibold">Lunes a Sábado:</p>
-              <p className="text-slate-400">7:30 AM – 6:00 PM</p>
-            </div>
-            <button
-              onClick={() => {
-                onSelectTab('cotizar');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
-              className="w-full mt-2 py-2 px-3 bg-[#1e3a8a] hover:bg-blue-700 text-white rounded text-xs font-semibold font-heading transition-colors"
-            >
-              Agendar Asesoría
-            </button>
-          </div>
         </div>
 
         {/* Bottom Bar */}

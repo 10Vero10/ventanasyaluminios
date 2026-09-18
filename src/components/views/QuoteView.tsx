@@ -587,7 +587,7 @@ export const QuoteView: React.FC<QuoteViewProps> = ({
               <div className="pt-2 border-t border-[#f1f5f9] space-y-2 text-xs text-[#334155]">
                 <div className="flex items-center gap-2">
                   <Clock className="w-4 h-4 text-[#0284c7]" />
-                  <span><strong>Lunes a Sábado:</strong> 7:30 AM – 6:00 PM</span>
+                  <span><strong>Lunes a Viernes:</strong> 7:30 AM – 6:00 PM</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="w-4 h-4 text-[#16a34a]" />

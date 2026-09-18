@@ -38,7 +38,7 @@ export const INITIAL_ABOUT_CONTENT: AboutContent = {
 };
 
 export const INITIAL_SITE_CONTENT: SiteContent = {
-  heroTitle: 'Aluminio y vidrio a la medida del proyecto',
+  heroTitle: 'Ventanas y Aluminios SAS',
   heroSubtitle: 'Fabricamos e instalamos ventanas, puertas, portones y divisiones, con más de 25 años de experiencia y acabados de excelencia.',
   heroImage: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80',
   heroBadge: 'VIDRIO TEMPLADO & ALUMINIO · Sistemas 2025',
@@ -144,7 +144,7 @@ export const PRODUCT_SYSTEMS: ProductSystem[] = [
     specs: [
       { label: 'Resistencia', value: 'Resistente a Corrosión y Salitre' },
       { label: 'Seguridad', value: 'Cerraduras de seguridad multipunto' },
-      { label: 'Bisagras', value: 'Pivote reforzado oculto' },
+      { label: 'Bisagras', value: 'Bisagras en acero' },
     ],
     features: ['Perfil estructural serie 80', 'Cerradura de alta seguridad', 'Acabados anodizados o pintura electrostática'],
     ctaText: 'Cotizar puerta de aluminio',
@@ -161,7 +161,7 @@ export const PRODUCT_SYSTEMS: ProductSystem[] = [
     specs: [
       { label: 'Cristal', value: 'Templado 8mm - 12mm de seguridad' },
       { label: 'Mecanismo', value: 'Pivotes hidráulicos de piso' },
-      { label: 'Acabados', value: 'Vidrio Grabado, Satinado o Claro' },
+      { label: 'Acabados', value: 'Vidrio Satinado o Claro' },
     ],
     features: ['Cajas hidráulicas embutidas al piso', 'Tiradores arquitectónicos en acero inoxidable', 'Freno a 90° con retorno controlado'],
     ctaText: 'Cotizar puerta de vidrio templado',
@@ -178,7 +178,7 @@ export const PRODUCT_SYSTEMS: ProductSystem[] = [
     specs: [
       { label: 'Clima', value: 'Cero condensación y sellado total' },
       { label: 'Cierres', value: 'Cierres herméticos perimetrales' },
-      { label: 'Refuerzo', value: 'Alma interior de acero galvanizado' },
+      { label: 'Refuerzo', value: 'Almatensor en casos necesarios' },
     ],
     features: ['Perfiles multicámara europeos', 'Vidrio laminado acústico o termopanel', 'Ahorro de energía en climatización'],
     ctaText: 'Cotizar puerta termoacústica',

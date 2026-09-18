@@ -55,7 +55,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
               {/* Title with italic emphasis */}
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#00236f] tracking-tight font-heading leading-tight">
-                Aluminio y vidrio <span className="font-serif italic font-normal text-[#1e40af]">a la medida</span> del proyecto
+                Ventanas y Aluminios SAS
               </h1>
 
               {/* Description */}
@@ -166,7 +166,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
               <span className="text-[#1e40af]">{content.experienceYears} años</span> fabricando confianza
             </h2>
             <p className="text-sm sm:text-base text-[#475569] max-w-3xl leading-relaxed">
-              Desde cada taller hasta el control final de calidad, cuidamos cada detalle en la fabricación y la instalación de tus ventanas, puertas, portones y divisiones.
+              DESDE NUESTRO TALLER
             </p>
           </div>
 
@@ -186,7 +186,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 </h3>
               </div>
               <p className="text-sm text-[#475569] leading-relaxed">
-                Cortes de perfilería con precisión digital que garantizan acoples herméticos y sin filtraciones de viento o agua.
+                PRESCISIÓN MILIMETRICA
               </p>
             </div>
 
